@@ -10,11 +10,14 @@ import { CinemaService } from '../cinema.service';
 export class MovieListComponent implements OnInit {
 
   films: Movie[];
-
+  query: string;
   constructor(public banana: CinemaService) { }
 
-  ngOnInit() {
-    this.banana.getAll().subscribe(p => this.films = p);
+  ottieni() {
+    this.banana.getAll(this.query).subscribe(p => this.films = p);
   }
+
+  ngOnInit() {}
+
 
 }

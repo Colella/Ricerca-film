@@ -7,13 +7,15 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CinemaService {
 
-  private baseUrl: String = 'https://api.themoviedb.org/3';
+  apiKey = '44df2ade9e4e7b9cf906452137cd15b9';
+  language = 'it';
+  baseUrl: String = 'https://api.themoviedb.org/3';
 
   constructor(private http: Http) {  }
 
-  getAll(): Observable<Movie[]> {
+  getAll(query: string): Observable<Movie[]> {
     const people$ = this.http
-      .get(`${this.baseUrl}/search/movie?api_key=96d78de0c62a84b4e7c4e90b8c908964&language=it-IT&query=spiderman&page=1&include_adult=true`)
+      .get(generateLink(this.apiKey, this.language, query))
       .map(mapPersons);
     return people$;
   }
@@ -37,4 +39,10 @@ function mapPersons(response: Response): Movie[] {
   // The response of the API has a results
   // property with the actual results
   return response.json().results.map(toPerson)
+}
+
+function generateLink(apiKey: string, language: string, text: string): string {
+  let baseLink: string;
+  baseLink = 'https://api.themoviedb.org/3/search/movie?';
+  return baseLink +  'api_key=' + apiKey + '&language=' + language + '&query=' + text + '&include_adult=true';
 }
