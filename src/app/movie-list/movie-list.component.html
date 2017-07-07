@@ -14,9 +14,9 @@
     <div class="col-md-12" style="height: 20px"></div>
   </div>
   <div class="row">
-    <div class="col-md-8 col-md-offset-2" style="padding: 20px; border: 2px lightblue solid; text-align: center" >
+    <div class="col-md-8 col-md-offset-2" style="padding: 20px; border: 2px lightblue solid; text-align: center" *ngFor="let x of films" >
 
-      {{films.backdrop_path }}
+      {{ x.title }}
 
 
     </div>

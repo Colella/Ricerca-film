@@ -18,12 +18,12 @@ export class PeopleService {
     return people$;
   }
 
- get(id: number): Observable<Person> {
+ /*get(id: number): Observable<Person> {
     const person$ = this.http
       .get(`${this.baseUrl}${id}?api_key=96d78de0c62a84b4e7c4e90b8c908964`)
       .map(mapPerson);
     return person$;
-  }
+  }*/
 
 }
 
@@ -35,7 +35,6 @@ function mapPersons(response: Response): Person[] {
 
 function toPerson(r: any): Person {
   const person = <Person>({
-
     id: extractId(r),
     url: r.url,
     name: r.name,

@@ -11,10 +11,10 @@ export class CinemaService {
 
   constructor(private http: Http) {  }
 
-  getAll(): Observable<Movie> {
+  getAll(): Observable<Movie[]> {
     const people$ = this.http
-      .get(`${this.baseUrl}/movie/551?api_key=96d78de0c62a84b4e7c4e90b8c908964`)
-      .map(mapPerson);
+      .get(`${this.baseUrl}/search/movie?api_key=96d78de0c62a84b4e7c4e90b8c908964&language=it-IT&query=spiderman&page=1&include_adult=true`)
+      .map(mapPersons);
     return people$;
   }
 
@@ -23,13 +23,18 @@ export class CinemaService {
 function toPerson(r: any): Movie {
   const person = <Movie> ({
 
-    backdrop_path: r.backdrop_path
+    title: r.title
 
   });
-  console.log('Parsed person:', person);
   return person;
 }
 
 function mapPerson(response: Response): Movie {
   return toPerson(response.json());
+}
+
+function mapPersons(response: Response): Movie[] {
+  // The response of the API has a results
+  // property with the actual results
+  return response.json().results.map(toPerson)
 }

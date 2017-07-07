@@ -1,5 +1,7 @@
 export class Movie {
 
-  backdrop_path: String;
+  title: String;
+
+
 
 }
