@@ -9,12 +9,21 @@ import { CinemaService } from '../cinema.service';
 })
 export class MovieListComponent implements OnInit {
 
+  numbers: Array<number> = new Array();
   films: Movie[];
   query: string;
-  constructor(public banana: CinemaService) { }
+  constructor(public cService: CinemaService) {
+    for (let i = 0; i < 3; i++) {
+      this.numbers.push(1);
+    }
+  }
 
-  ottieni() {
-    this.banana.getAll(this.query).subscribe(p => this.films = p);
+  ottieni(event) {
+    if (event.keyCode === 27) {
+      this.films = [];
+    } else {
+      this.cService.getAll(this.query).subscribe(p => this.films = p);
+    }
   }
 
   ngOnInit() {}

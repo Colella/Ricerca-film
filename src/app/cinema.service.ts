@@ -14,35 +14,36 @@ export class CinemaService {
   constructor(private http: Http) {  }
 
   getAll(query: string): Observable<Movie[]> {
-    const people$ = this.http
+    const movies$ = this.http
       .get(generateLink(this.apiKey, this.language, query))
       .map(mapPersons);
-    return people$;
+    return movies$;
   }
 
 }
 
-function toPerson(r: any): Movie {
-  const person = <Movie> ({
+function toMovie(r: any): Movie {
+  const movie = <Movie> ({
 
-    title: r.title
+    title: r.title,
+    vote_average: r.vote_average.toString()
 
   });
-  return person;
+  return movie;
 }
 
-function mapPerson(response: Response): Movie {
-  return toPerson(response.json());
+function mapMovie(response: Response): Movie {
+  return toMovie(response.json());
 }
 
 function mapPersons(response: Response): Movie[] {
   // The response of the API has a results
   // property with the actual results
-  return response.json().results.map(toPerson)
+  return response.json().results.map(toMovie)
 }
 
 function generateLink(apiKey: string, language: string, text: string): string {
   let baseLink: string;
   baseLink = 'https://api.themoviedb.org/3/search/movie?';
-  return baseLink +  'api_key=' + apiKey + '&language=' + language + '&query=' + text + '&include_adult=true';
+  return baseLink + 'api_key=' + apiKey + '&language=' + language + '&query=' + text + '&include_adult=true';
 }

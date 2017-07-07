@@ -1,24 +1,24 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3" style="background: teal; padding: 20px; border-radius: 10px 10px 10px 10px">
-      <form class="form-group">
-        <label>Cerca...</label>
-        <input type="text" class="form-control" id="name" name="name" [(ngModel)] ="query" >
-        <div style="padding-top: 20px">
-          <button type="submit" class="btn btn-danger btn-block" (click)="ottieni();" onclick="return false;">Clicca</button>
-        </div>
+      <form class="form-group" (keydown)="ottieni($event)" >
+        <label>Cerca film...</label>
+        <input type="text" class="form-control" id="name" name="name" [(ngModel)]="query" title="name" >
+        <!--<div style="padding-top: 20px">
+          <!-- <button type="submit" class="btn btn-danger btn-block" (click)="ottieni();" onClick="return false;" (keydown)="ottieni()" (keydown)="ottieni()">Clicca
+          </button>
+        </div>-->
       </form>
     </div>
-  </div>
-  <div class="row">
+
     <div class="col-md-12" style="height: 20px"></div>
   </div>
   <div class="row">
-    <div class="col-md-8 col-md-offset-2" style="padding: 20px; border: 2px lightblue solid; text-align: center" *ngFor="let x of films" >
+    <div class="col-md-8 col-md-offset-2" style="margin-bottom: 10px; padding: 20px; border: 2px lightblue solid; border-radius: 10px; text-align: center" *ngFor="let x of films" >
 
-      {{ x.title }}
+      {{ x.title }} {{x.vote_average}} <img *ngFor="let x of numbers" width="30px" src="http://www.iconsdb.com/icons/preview/gray/star-xxl.png">
 
-
+      <!-- http://www.iconsdb.com/icons/preview/gray/star-xxl.png -->
     </div>
   </div>
 </div>
