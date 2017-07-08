@@ -1,25 +1,26 @@
-import {Component , OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Movie} from '../movie'
 import {CinemaService} from '../cinema.service';
 
 @Component({
-  selector: 'app-movie-list' ,
-  templateUrl: './movie-list.component.html' ,
+  selector: 'app-movie-list',
+  templateUrl: './movie-list.component.html',
   styleUrls: ['./movie-list.component.css']
 })
 export class MovieListComponent implements OnInit {
 
-  numbers: Array<number> = new Array();
+  numbers: Array<number> = [];
   films: Movie[];
   query: string;
 
-  constructor (public cService: CinemaService) {
+  constructor(public cService: CinemaService) {
     for (let i = 0; i < 3; i++) {
       this.numbers.push(1);
     }
   }
 
-  ottieni (event , input: HTMLInputElement) {
+  ottieni(event, input: HTMLInputElement) {
+    //console.log(event, event.keyCode);
     if (event.keyCode === 27) {
       input.value = '';
       this.films = [];
@@ -28,13 +29,14 @@ export class MovieListComponent implements OnInit {
     }
   }
 
-  clear (input: HTMLInputElement) {
+  clear(input: HTMLInputElement) {
     input.value = '';
     this.films = [];
   }
 
-  ngOnInit () {
+  ngOnInit() {
   }
 
 
 }
+

@@ -1,6 +1,9 @@
 export class Movie {
+
   title: String;
   vote_average: number;
-  overview: String;
-  poster_path: String;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+
 }

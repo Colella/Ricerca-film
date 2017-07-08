@@ -3,6 +3,7 @@ import { Movie } from './movie';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import * as moment from 'moment';
 
 @Injectable()
 export class CinemaService {
@@ -28,7 +29,8 @@ function toMovie(r: any): Movie {
     title: r.title,
     vote_average: r.vote_average,
     overview: r.overview,
-    poster_path: r.poster_path
+    poster_path: r.poster_path,
+    release_date: moment(r.release_date).format('YYYY')
 
   });
   return movie;

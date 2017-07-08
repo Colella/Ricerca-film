@@ -7,17 +7,21 @@
   margin: auto;
   font-size: 14px;
   cursor: pointer;
-  color: black;
+  color: #ccc;
 }
 
 .bordato {
   border: 1px lightseagreen solid;
-
 }
 
 .bordatoSotto {
   border: 1px lightseagreen solid;
-  height: 400px;
   padding: 20px;
 }
 
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
