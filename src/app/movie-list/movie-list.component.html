@@ -18,19 +18,30 @@
          *ngFor="let x of films">
 
       <div class="row">
-        <div class="col-md-4">
-          {{ x.title }}
+        <div class="col-md-10 col-md-offset-1 bordato">
+          <h2 style="margin: 4px">{{ x.title }}</h2>
         </div>
-        <div class="col-md-4 col-md-offset-4">
-        <span class="rating_bar">
-           <span [style.width.%]="x.vote_average*10"></span></span>
-        </div>
+
       </div>
       <div class="row">
-        <div class="col-md-6"><img width="200px" src="https://image.tmdb.org/t/p/w500/{{x.poster_path}}"></div>
-        <div class="col-md-6">{{x.overview}}</div>
+        <div class="col-md-5 col-md-offset-1 bordatoSotto">
+
+
+          <img width="200px" alt="Not Found"
+               src="https://image.tmdb.org/t/p/w500/{{x.poster_path}}"
+               onError="this.src='http://i65.tinypic.com/2iixxcw.jpg';">
+          <div style="padding-top: 15px">
+        <span class="rating_bar">
+           <span [style.width.%]="x.vote_average*10"></span></span>
+          </div>
+        </div>
+        <div class="col-md-5 bordatoSotto">
+          <div><h4>Descrizione:</h4></div>
+          <div>{{x.overview}}</div>
+        </div>
       </div>
 
+    </div>
   </div>
-</div>
 
+</div>

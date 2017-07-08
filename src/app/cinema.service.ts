@@ -47,5 +47,5 @@ function mapPersons(response: Response): Movie[] {
 function generateLink(apiKey: string, language: string, text: string): string {
   let baseLink: string;
   baseLink = 'https://api.themoviedb.org/3/search/movie?';
-  return baseLink + 'api_key=' + apiKey + '&language=' + language + '&query=' + text + '&include_adult=true';
+  return baseLink + 'api_key=' + apiKey + '&language=' + language + '&query=' + text + '&include_adult=false';
 }

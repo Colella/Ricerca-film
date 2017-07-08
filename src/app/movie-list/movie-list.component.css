@@ -10,3 +10,14 @@
   color: black;
 }
 
+.bordato {
+  border: 1px lightseagreen solid;
+
+}
+
+.bordatoSotto {
+  border: 1px lightseagreen solid;
+  height: 400px;
+  padding: 20px;
+}
+
