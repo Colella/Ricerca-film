@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+/*
+Use like this:
+<span class="rating_bar"><span style="width:27%"></span></span>
+*/
+/* Default */
+.rating_bar {
+  display:inline-block;
+  /* 100 = 20*5; 20 is the width of the background picture */
+  width: 100px;
+  /* Otherwise layout might break*/
+  /* when inherited align is center or right: */
+  text-align:left;
+  /* This is the picture of a single empty star */
+  background: url(http://i65.tinypic.com/20jjy81.png) 0 0 repeat-x;
+}
+
+.rating_bar span {
+  display:inherit;
+  /* 20 is the height of the background picture */
+  height: 20px;
+  /* This is the picture of a single full star */
+  background: url(http://i63.tinypic.com/21lpc3b.jpg) 0 0 repeat-x;
+}

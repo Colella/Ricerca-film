@@ -26,7 +26,9 @@ function toMovie(r: any): Movie {
   const movie = <Movie> ({
 
     title: r.title,
-    vote_average: r.vote_average.toString()
+    vote_average: r.vote_average,
+    overview: r.overview,
+    poster_path: r.poster_path
 
   });
   return movie;
