@@ -22,6 +22,12 @@ export class MovieDetailComponent implements OnInit {
     this.cService.getMovie(this.id).subscribe(p => this.movie = p);
   }
 
+  isEmpty(x: MovieService) {
+    if (x.overview == null || x.overview === '') {
+      return true;
+    } else { return false; }
+  }
+
   ngOnInit() {
 
 

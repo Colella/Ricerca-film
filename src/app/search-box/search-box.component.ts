@@ -12,7 +12,8 @@ export class SearchBoxComponent implements OnInit {
   query: string;
   films: Array<MovieService> = new Array<MovieService>();
 
-  constructor (private cService: CinemaService) { }
+  constructor (private cService: CinemaService) {
+  }
 
   ottieni (event , input: HTMLInputElement) {
     if (event.keyCode === 27) {
@@ -21,6 +22,13 @@ export class SearchBoxComponent implements OnInit {
     } else {
       this.cService.getAll(this.query).subscribe(p => this.films = p);
     }
+
+  }
+
+  isEmpty (x: MovieService) {
+    if (x.overview == null || x.overview === '') {
+      return true;
+    } else { return false; }
 
   }
 

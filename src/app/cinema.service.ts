@@ -26,7 +26,6 @@ export class CinemaService {
 
   getMovie(id: number): Observable<MovieService> {
     const movie$ = this.http
-      //.get(`${this.baseUrl}/${id}?api_key=` + this.apiKey)
       .get(generateDetailLink(id, this.apiKey, this.language))
       .map(mapMovie);
     return movie$;
