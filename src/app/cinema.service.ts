@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Movie } from './movie';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { MovieService} from './movie.service'
 import * as moment from 'moment';
 
 @Injectable()
@@ -10,21 +10,31 @@ export class CinemaService {
 
   apiKey = '44df2ade9e4e7b9cf906452137cd15b9';
   language = 'it';
-  baseUrl: String = 'https://api.themoviedb.org/3';
+  private listaFilms: Array<MovieService>;
 
-  constructor(private http: Http) {  }
+  constructor(private http: Http) {
+    this.listaFilms = new Array<MovieService>();
+  }
 
-  getAll(query: string): Observable<Movie[]> {
+  getAll(query: string): Observable<MovieService[]> {
     const movies$ = this.http
       .get(generateLink(this.apiKey, this.language, query))
-      .map(mapPersons);
+      .map(mapFilms);
     return movies$;
+  }
+
+  getAllFilms() {
+    return this.listaFilms;
+  }
+
+  riempiFilm(films: MovieService[]) {
+    this.listaFilms = films;
   }
 
 }
 
-function toMovie(r: any): Movie {
-  const movie = <Movie> ({
+function toMovie(r: any): MovieService {
+  const movie = <MovieService> ({
 
     title: r.title,
     vote_average: r.vote_average,
@@ -36,11 +46,11 @@ function toMovie(r: any): Movie {
   return movie;
 }
 
-function mapMovie(response: Response): Movie {
+function mapMovie(response: Response): MovieService {
   return toMovie(response.json());
 }
 
-function mapPersons(response: Response): Movie[] {
+function mapFilms(response: Response): MovieService[] {
   // The response of the API has a results
   // property with the actual results
   return response.json().results.map(toMovie)

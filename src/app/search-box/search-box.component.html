@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3" style="background: teal; padding: 20px; border-radius: 10px 10px 10px 10px">
+    <!-- FORM DI RICERCA FILM -->
+   <form class="form-group" (keyup)="ottieni($event,searchInput)">
+      <div align="center">
+        <label>Cerca film...</label>
+        <div class="btn-group btn-block">
+          <input #searchInput type="search" class="form-control" id="name" name="name" [(ngModel)]="query" title="name">
+          <span id="searchclear" class="glyphicon glyphicon-remove-circle" (click)="clear(searchInput)"></span>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-12" style="height: 20px"></div>
+</div>
+
+<div class="row">
+
+  <div class="col-md-8 col-md-offset-2"
+       style="margin-bottom: 10px;  border: 2px lightblue solid; border-radius: 10px; text-align: center; background: #069c7e"
+       *ngFor="let x of films">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 bordato">
+        <h3 style="margin: 8px">
+          {{ x.title }}
+
+          <!-- L'IF PER VERIFICARE SE LA DATA ESISTE -->
+          <div *ngIf='x.release_date!="Invalid date"; then thenBlockDate else elseBlockDate'></div>
+          <ng-template #thenBlockDate>({{x.release_date}})</ng-template>
+          <ng-template #elseBlockDate></ng-template>
+        </h3>
+      </div>
+    </div>
+    <div class="row row-eq-height">
+      <!-- LOCANDINA E RATING BAR -->
+      <div class="col-md-5 col-md-offset-1 bordatoSotto">
+        <img width="200px" alt="Not Found"
+             src="https://image.tmdb.org/t/p/w500/{{x.poster_path}}"
+             onError="this.src='http://i65.tinypic.com/2iixxcw.jpg';">
+        <div style="margin-top: 30px">
+            <span class="rating_bar">
+            <span [style.width.%]="x.vote_average*10"></span></span>
+        </div>
+      </div>
+
+      <div class="col-md-5 bordatoSotto">
+        <div>
+          <h3 style="margin: 0; margin-bottom: 10px;">Descrizione</h3>
+        </div>
+
+        <!-- L'IF PER VERIFICARE SE LA DESCRIZIONE ESISTE -->
+        <div *ngIf='x.overview!=""; then thenBlock else elseBlock'></div>
+
+        <ng-template #thenBlock>{{x.overview}}</ng-template>
+        <ng-template #elseBlock>NO DESCRIPTION AVAILABLE</ng-template>
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+

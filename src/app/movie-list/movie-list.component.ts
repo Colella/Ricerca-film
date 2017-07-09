@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Movie} from '../movie'
+import {Component , Inject , OnInit} from '@angular/core';
 import {CinemaService} from '../cinema.service';
+import { MovieService} from '../movie.service'
+import {SearchBoxComponent} from '../search-box/search-box.component';
 
 @Component({
   selector: 'app-movie-list',
@@ -9,29 +10,10 @@ import {CinemaService} from '../cinema.service';
 })
 export class MovieListComponent implements OnInit {
 
-  numbers: Array<number> = [];
-  films: Movie[];
-  query: string;
+  films: Array<MovieService> = new Array<MovieService>();
 
   constructor(public cService: CinemaService) {
-    for (let i = 0; i < 3; i++) {
-      this.numbers.push(1);
-    }
-  }
-
-  ottieni(event, input: HTMLInputElement) {
-    //console.log(event, event.keyCode);
-    if (event.keyCode === 27) {
-      input.value = '';
-      this.films = [];
-    } else {
-      this.cService.getAll(this.query).subscribe(p => this.films = p);
-    }
-  }
-
-  clear(input: HTMLInputElement) {
-    input.value = '';
-    this.films = [];
+         this.cService.getAllFilms();
   }
 
   ngOnInit() {
