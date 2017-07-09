@@ -15,7 +15,6 @@ export class SearchBoxComponent implements OnInit {
   constructor (private cService: CinemaService) { }
 
   ottieni (event , input: HTMLInputElement) {
-
     if (event.keyCode === 27) {
       input.value = '';
       this.films = [];
@@ -23,12 +22,6 @@ export class SearchBoxComponent implements OnInit {
       this.cService.getAll(this.query).subscribe(p => this.films = p);
     }
 
-    this.cService.riempiFilm(this.films);
-
-  }
-
-  giveAway() {
-    return this.films;
   }
 
   clear (input: HTMLInputElement) {

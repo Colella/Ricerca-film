@@ -6,24 +6,35 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { ApiservicesService } from './services/apiservices.service';
 import { CinemaService } from './cinema.service';
-import { MovieListComponent } from './movie-list/movie-list.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
-import {MovieService} from './movie.service';
+import { MovieService } from './movie.service';
+import { RouterModule } from '@angular/router';
+import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MovieListComponent,
     SearchBoxComponent,
+    MovieDetailComponent,
   ],
   imports: [
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: SearchBoxComponent
+      },
+      {
+        path: 'movie',
+        component: MovieDetailComponent
+      }
+    ]),
     BrowserModule,
     FormsModule,
     HttpModule,
   ],
   providers: [
-    // ApiservicesService,
+    ApiservicesService,
     CinemaService,
     MovieService,
   ],

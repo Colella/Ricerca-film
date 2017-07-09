@@ -25,3 +25,8 @@
   display: -ms-flexbox;
   display:         flex;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-10 col-md-offset-1"
+       style="margin-bottom: 10px;  border: 2px lightblue solid; border-radius: 10px; text-align: center; background: #069c7e">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 bordato">
+        <h3 style="margin: 8px">
+          {{ movie.title }}
+
+          <!-- L'IF PER VERIFICARE SE LA DATA ESISTE -->
+          <div *ngIf='movie.release_date!="Invalid date"; then thenBlockDate else elseBlockDate'></div>
+          <ng-template #thenBlockDate>({{movie.release_date}})</ng-template>
+          <ng-template #elseBlockDate></ng-template>
+        </h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 bordato">
+        <h4 style="margin: 8px">
+          Titolo originale: {{ movie.original_title }} - Lingua originale: {{ movie.original_language }}
+        </h4>
+      </div>
+    </div>
+    <div class="row row-eq-height">
+      <!-- LOCANDINA E RATING BAR -->
+      <div class="col-md-5 col-md-offset-1 bordatoSotto">
+        <img width="200px" alt="Not Found"
+             src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}"
+             onError="this.src='http://i65.tinypic.com/2iixxcw.jpg';">
+        <div style="margin-top: 30px">
+            <span class="rating_bar">
+            <span [style.width.%]="movie.vote_average*10"></span></span>
+        </div>
+      </div>
+
+      <div class="col-md-5 bordatoSotto">
+        <div>
+          <h3 style="margin: 0; margin-bottom: 10px;">Descrizione</h3>
+        </div>
+
+        <!-- L'IF PER VERIFICARE SE LA DESCRIZIONE ESISTE -->
+        <div *ngIf='movie.overview!=""; then thenBlock else elseBlock'></div>
+
+        <ng-template #thenBlock>{{movie.overview}}</ng-template>
+        <ng-template #elseBlock>NO DESCRIPTION AVAILABLE</ng-template>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="margin: 30px">
+  <div class="col-md-4 col-md-offset-4 text-center">
+    <div class="centered">
+        <a href="/index.html"><img width="100px" src="http://i67.tinypic.com/xljaed.jpg" alt="INDIETRO"></a>
+    </div>
+  </div>
+</div>
+
+

@@ -11,6 +11,7 @@ export class CinemaService {
   apiKey = '44df2ade9e4e7b9cf906452137cd15b9';
   language = 'it';
   private listaFilms: Array<MovieService>;
+  baseUrl = 'https://api.themoviedb.org/3/movie';
 
   constructor(private http: Http) {
     this.listaFilms = new Array<MovieService>();
@@ -23,12 +24,12 @@ export class CinemaService {
     return movies$;
   }
 
-  getAllFilms() {
-    return this.listaFilms;
-  }
-
-  riempiFilm(films: MovieService[]) {
-    this.listaFilms = films;
+  getMovie(id: number): Observable<MovieService> {
+    const movie$ = this.http
+      //.get(`${this.baseUrl}/${id}?api_key=` + this.apiKey)
+      .get(generateDetailLink(id, this.apiKey, this.language))
+      .map(mapMovie);
+    return movie$;
   }
 
 }
@@ -36,11 +37,14 @@ export class CinemaService {
 function toMovie(r: any): MovieService {
   const movie = <MovieService> ({
 
+    id: r.id,
     title: r.title,
     vote_average: r.vote_average,
     overview: r.overview,
     poster_path: r.poster_path,
-    release_date: moment(r.release_date).format('YYYY')
+    release_date: moment(r.release_date).format('YYYY'),
+    original_title: r.original_title,
+    original_language: r.original_language
 
   });
   return movie;
@@ -56,8 +60,16 @@ function mapFilms(response: Response): MovieService[] {
   return response.json().results.map(toMovie)
 }
 
+
+
 function generateLink(apiKey: string, language: string, text: string): string {
   let baseLink: string;
   baseLink = 'https://api.themoviedb.org/3/search/movie?';
   return baseLink + 'api_key=' + apiKey + '&language=' + language + '&query=' + text + '&include_adult=false';
+}
+
+function generateDetailLink(id: number, apiKey: string, language: string): string {
+  let baseLink: string;
+  baseLink = 'https://api.themoviedb.org/3/movie/';
+  return baseLink + id + '?api_key=' + apiKey + '&language=' + language;
 }

@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3" style="background: teal; padding: 20px; border-radius: 10px 10px 10px 10px">
     <!-- FORM DI RICERCA FILM -->
-   <form class="form-group" (keyup)="ottieni($event,searchInput)">
-      <div align="center">
+    <form class="form-group" (keyup)="ottieni($event,searchInput)">
+      <div>
         <label>Cerca film...</label>
         <div class="btn-group btn-block">
           <input #searchInput type="search" class="form-control" id="name" name="name" [(ngModel)]="query" title="name">
@@ -15,14 +15,13 @@
 </div>
 
 <div class="row">
-
   <div class="col-md-8 col-md-offset-2"
        style="margin-bottom: 10px;  border: 2px lightblue solid; border-radius: 10px; text-align: center; background: #069c7e"
        *ngFor="let x of films">
     <div class="row">
       <div class="col-md-10 col-md-offset-1 bordato">
         <h3 style="margin: 8px">
-          {{ x.title }}
+          <a [routerLink]="['/movie', {id: x.id}]">{{ x.title }}</a>
 
           <!-- L'IF PER VERIFICARE SE LA DATA ESISTE -->
           <div *ngIf='x.release_date!="Invalid date"; then thenBlockDate else elseBlockDate'></div>
@@ -60,4 +59,9 @@
 
   </div>
 </div>
+
+
+
+
+
 
