@@ -1,7 +1,8 @@
 import {Component , Input , OnInit} from '@angular/core';
 import {CinemaService} from '../cinema.service';
 import {MovieService} from '../movie.service';
-import {ActivatedRoute , Router} from '@angular/router';
+import {ActivatedRoute , Params , Router} from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-movie-detail',
@@ -11,15 +12,10 @@ import {ActivatedRoute , Router} from '@angular/router';
 export class MovieDetailComponent implements OnInit {
 
   id: number;
-  movie: MovieService;
+  movie: any;
 
   constructor(private cService: CinemaService, private route: ActivatedRoute) {
-    this.route.params.subscribe(
-      (params: any) => {
-        this.id = params['id'];
-      }
-    )
-    this.cService.getMovie(this.id).subscribe(p => this.movie = p);
+
   }
 
   isEmpty(x: MovieService) {
@@ -28,9 +24,17 @@ export class MovieDetailComponent implements OnInit {
     } else { return false; }
   }
 
+  /*
   ngOnInit() {
+    this.movie = this.route.params.subscribe(
+      (params: any) => {
+        this.id = params['id'];
+      }
+    )*/
 
-
+  ngOnInit() {
+    this.route.params.switchMap((params: Params) => this.cService.getMovie(+params['id']))
+      .subscribe(p => this.movie = p);
   }
 
 }

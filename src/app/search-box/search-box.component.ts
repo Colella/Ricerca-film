@@ -1,6 +1,7 @@
 import {Component , OnInit} from '@angular/core';
 import {MovieService} from '../movie.service'
 import {CinemaService} from '../cinema.service';
+import {ActivatedRoute , Router} from '@angular/router';
 
 @Component({
   selector: 'app-search-box' ,
@@ -9,10 +10,11 @@ import {CinemaService} from '../cinema.service';
 })
 export class SearchBoxComponent implements OnInit {
 
+  selected_id: number;
   query: string;
   films: Array<MovieService> = new Array<MovieService>();
 
-  constructor (private cService: CinemaService) {
+  constructor (private cService: CinemaService, private router: Router, private route: ActivatedRoute ) {
   }
 
   ottieni (event , input: HTMLInputElement) {
@@ -32,12 +34,22 @@ export class SearchBoxComponent implements OnInit {
 
   }
 
+ /* onSelect(id: number) {
+    this.selected_id = id;
+    this.router.navigate()
+  }*/
+
   clear (input: HTMLInputElement) {
     input.value = '';
     this.films = [];
   }
 
+  onClick () {
+    this.router.navigate(['/movie', 456]);
+  }
+
   ngOnInit () {
+
   }
 
 }

@@ -12,6 +12,8 @@ export class CinemaService {
   language = 'it';
   private listaFilms: Array<MovieService>;
   baseUrl = 'https://api.themoviedb.org/3/movie';
+  movie$: Observable<MovieService>;
+  banana: MovieService;
 
   constructor(private http: Http) {
     this.listaFilms = new Array<MovieService>();
@@ -25,11 +27,17 @@ export class CinemaService {
   }
 
   getMovie(id: number): Observable<MovieService> {
-    const movie$ = this.http
+    this.movie$ = this.http
       .get(generateDetailLink(id, this.apiKey, this.language))
       .map(mapMovie);
-    return movie$;
+    return this.movie$;
+
   }
+
+  zucco(id: number) {
+    this.getMovie(id).subscribe(p => this.banana = p);
+  }
+
 
 }
 

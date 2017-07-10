@@ -3,17 +3,16 @@
     <form class="form-group search" method="post" action="index.html" (keyup)="ottieni($event,searchInput)" autocomplete="off">
       <input #searchInput type="text" name="name" [(ngModel)]="query" title="name">
       <ul class="results">
-        <li *ngFor="let x of films">
-          <a [routerLink]="['/movie', {id: x.id}]">
+        <li *ngFor="let x of films" >
+          <a [routerLink]="['/movie', x.id]" >
             <div style="float: left">{{x.title}}</div>
             <div align="right">
-            <span class="rating_bar">
-            <span [style.width.%]="x.vote_average*10"></span></span></div>
+             <span class="rating_bar">
+             <span [style.width.%]="x.vote_average*10"></span></span></div>
           </a>
         </li>
       </ul>
     </form>
   </section>
 </div>
-
 

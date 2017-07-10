@@ -10,6 +10,7 @@ import { SearchBoxComponent } from './search-box/search-box.component';
 import { MovieService } from './movie.service';
 import { RouterModule } from '@angular/router';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
+import { EmptyComponent } from './empty/empty.component';
 
 
 @NgModule({
@@ -17,15 +18,16 @@ import { MovieDetailComponent } from './movie-detail/movie-detail.component';
     AppComponent,
     SearchBoxComponent,
     MovieDetailComponent,
+    EmptyComponent,
   ],
   imports: [
     RouterModule.forRoot([
       {
         path: '',
-        component: SearchBoxComponent
+        component: EmptyComponent
       },
       {
-        path: 'movie',
+        path: 'movie/:id',
         component: MovieDetailComponent
       }
     ]),
