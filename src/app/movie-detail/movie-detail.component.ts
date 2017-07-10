@@ -18,21 +18,7 @@ export class MovieDetailComponent implements OnInit {
 
   }
 
-  isEmpty(x: MovieService) {
-    if (x.overview == null || x.overview === '') {
-      return true;
-    } else { return false; }
-  }
-
-  /*
-  ngOnInit() {
-    this.movie = this.route.params.subscribe(
-      (params: any) => {
-        this.id = params['id'];
-      }
-    )*/
-
-  ngOnInit() {
+ ngOnInit() {
     this.route.params.switchMap((params: Params) => this.cService.getMovie(+params['id']))
       .subscribe(p => this.movie = p);
   }

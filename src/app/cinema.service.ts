@@ -13,7 +13,6 @@ export class CinemaService {
   private listaFilms: Array<MovieService>;
   baseUrl = 'https://api.themoviedb.org/3/movie';
   movie$: Observable<MovieService>;
-  banana: MovieService;
 
   constructor(private http: Http) {
     this.listaFilms = new Array<MovieService>();
@@ -31,13 +30,7 @@ export class CinemaService {
       .get(generateDetailLink(id, this.apiKey, this.language))
       .map(mapMovie);
     return this.movie$;
-
   }
-
-  zucco(id: number) {
-    this.getMovie(id).subscribe(p => this.banana = p);
-  }
-
 
 }
 
@@ -47,7 +40,13 @@ function toMovie(r: any): MovieService {
     id: r.id,
     title: r.title,
     vote_average: r.vote_average,
-    overview: r.overview,
+
+
+    overview: (r.overview == null || r.overview === '') ? 'NO DESCRIPTION AVAILABLE' : r.overview,
+
+   // if ( r.overview == null || r.overview === '') { }
+
+
     poster_path: r.poster_path,
     release_date: moment(r.release_date).format('YYYY'),
     original_title: r.original_title,

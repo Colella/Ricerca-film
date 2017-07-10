@@ -27,25 +27,9 @@ export class SearchBoxComponent implements OnInit {
 
   }
 
-  isEmpty (x: MovieService) {
-    if (x.overview == null || x.overview === '') {
-      return true;
-    } else { return false; }
-
-  }
-
- /* onSelect(id: number) {
-    this.selected_id = id;
-    this.router.navigate()
-  }*/
-
   clear (input: HTMLInputElement) {
     input.value = '';
     this.films = [];
-  }
-
-  onClick () {
-    this.router.navigate(['/movie', 456]);
   }
 
   ngOnInit () {
