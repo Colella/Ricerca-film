@@ -46,6 +46,8 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
-    "typescript": "~2.3.3"
+    "typescript": "~2.3.3",
+    "moment": "^2.18.1",
+    "angular2-moment": "^1.4.0"
   }
 }
